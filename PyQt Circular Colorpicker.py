@@ -32,7 +32,6 @@ class defaultColors(QtGui.QWidget):
             "QPushButton:hover{border: 2px solid %s;} QPushButton{border: 0px solid black; max-width: %s; max-height: %s; min-width: %s; min-height: %s; border-radius: %s;}" % (
                 self.buttonsHoverColor, self.buttonsWidht, self.buttonsHeight, self.buttonsWidht, self.buttonsHeight,
                 self.buttonsRadius))
-        # self.setStyleSheet("QPushButton:hover{border: 2px solid %s;} QPushButton{border: 0px solid black; max-width: %s; max-height: %s; min-width: %s; min-height: %s; border-radius: %s;}" %(self.buttonsHoverColor, self.buttonsWidht, self.buttonsHeight, self.buttonsWidht, self.buttonsHeight,self.buttonsRadius))
 
         red = QtGui.QPushButton()
         red.setToolTip("Red")
