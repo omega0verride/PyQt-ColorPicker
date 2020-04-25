@@ -48,3 +48,5 @@ If you change the width the mouseDot might seem a bit off, this can be fixed on 
 	centralColorWidget_radius=20	   changes the border-radius of the color widget inside the circle
 	centerColorWidget_isCircle=True    if True sets the central color widget as a circle and ignores the value of centralColorWidget_radius
 	sliders=self.sliders		   is default, do not remove unless you remove all functoions associated with sliders
+	
+Notice - If you use this as a widget set oboject names for QPushButtons and QSliders of parent because it affects the child widget.
