@@ -50,6 +50,7 @@ If you change the width the mouseDot might seem a bit off, this can be fixed on 
 	sliders=self.sliders		   is default, do not remove unless you remove all functoions associated with sliders
 	
 You can get the updated values outside the class like this
+	
 	print(ColorPicker.hsv_color_array)
 
 Notice - If you use this as a widget set oboject names for QPushButtons and QSliders of parent because it affects the child widget.
