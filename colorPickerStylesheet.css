@@ -1,0 +1,42 @@
+QWidget{
+  background-color: rgb(17, 34, 49);
+}
+
+QPushButton#saturation_icon{
+  qproperty-icon: url(saturation_icon.png);
+  qproperty-iconSize: 25px;
+  border: 2px solid rgba(0, 0, 0, 0);
+  background-color: rgba(0, 0, 0, 0);
+  height: 25px;
+  width: 25px;
+  border-radius: 15px;
+  }
+  
+QPushButton#brightness_icon{
+  qproperty-icon: url(brightness_icon.png);
+  qproperty-iconSize: 25px;
+  border: 2px solid rgba(0, 0, 0, 0);
+  background-color: rgba(0, 0, 0, 0);
+  height: 25px;
+  width: 25px;
+  border-radius: 15px;
+  }
+
+QSlider::groove:horizontal {
+
+  background: white;
+  height: 5px;
+  border-radius: 2px;
+}
+QSlider::handle:horizontal {
+  background: #137df7;
+  border: 0px transparent;
+  width: 16px;
+  margin-top: -6px;
+  margin-bottom: -6px;
+  border-radius: 8px;
+}
+
+QLabel#mouseDot{
+  border: 3px solid #1c3f61;
+}
