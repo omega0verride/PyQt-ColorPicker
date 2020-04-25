@@ -32,7 +32,7 @@ If you change the width the mouseDot might seem a bit off, this can be fixed on 
                                            spaceBetweenSliders=0)
 	
 	####
-	"colorpicker_sliders" class must be initiated before "colorpickerWheel" class because it is passed to "colorpickerWheel"
+	#"colorpicker_sliders" class must be initiated before "colorpickerWheel" class because it is passed to "colorpickerWheel"
 	####
 	
 	self.colorpickerWidget = colorpickerWheel(colorpickerSize=self.width, startupcolor=self.startup_color,
