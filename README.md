@@ -30,10 +30,11 @@ If you change the width the mouseDot might seem a bit off, this can be fixed on 
 	self.sliders = colorpicker_sliders(slidersWidgetWidth=self.width, spaceBetweenColorpickerAndSliders=0,
                                            spaceBetweenSliders=0)
 	
+	####
 	"colorpicker_sliders" class must be initiated before "colorpickerWheel" class because it is passed to "colorpickerWheel"
+	####
 	
-	
-        self.colorpickerWidget = colorpickerWheel(colorpickerSize=self.width, startupcolor=self.startup_color,
+	self.colorpickerWidget = colorpickerWheel(colorpickerSize=self.width, startupcolor=self.startup_color,
                                                   mouseDot_size=30, mouseDotDistance_changer=2,
                                                   centralColorWidget_size=55, centralColorWidget_radius=20,
                                                   centerColorWidget_isCircle=True, sliders=self.sliders)
