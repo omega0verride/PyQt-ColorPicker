@@ -47,6 +47,7 @@ If you change the width the mouseDot might seem a bit off, this can be fixed on 
 	centralColorWidget_size=55	   changes the size of the color widget inside the circle
 	centralColorWidget_radius=20	   changes the border-radius of the color widget inside the circle
 	centerColorWidget_isCircle=True    if True sets the central color widget as a circle and ignores the value of centralColorWidget_radius
+	change_alpha_channel=True          if True changes the central color widget alpha channel (opacity) based on the value of brightness slider
 	sliders=self.sliders		   is default, do not remove unless you remove all functoions associated with sliders
 	
 You can get the updated values outside the class like this
