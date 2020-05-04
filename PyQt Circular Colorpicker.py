@@ -487,9 +487,11 @@ class ColorPicker(QtGui.QWidget):
         ColorPicker.hsv_color_array = color[0]  # (H(0-255), S(0-255), V(0-255))
         ColorPicker.rgb_color_array = color[1]  # (R(0-255), G(0-255), B(0-255))
         ColorPicker.hsv_color_array_base_360 = color[2]  # (H(0-360), S(0-100), V(0-100))
+        ColorPicker.hex_color = '%02x%02x%02x' % ColorPicker.rgb_color_array
         # print("HSV color", ColorPicker.hsv_color_array)
         # print(ColorPicker.hsv_color_array_360_base)
         # print("RGB color", ColorPicker.rgb_color_array)
+        #print("HEX Color", ColorPicker.hex_color)
 
 
 def run():
