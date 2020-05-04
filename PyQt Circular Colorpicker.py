@@ -258,21 +258,25 @@ class colorpickerWheel(QtGui.QWidget):
     def mousePressEvent(self, QMouseEvent):
         y = QMouseEvent.y() - self.height / 2
         x = QMouseEvent.x() - self.width / 2
-        if y == 0:
-            tangente = 0
+        if y == 0 and x < 0:
+            angle = 270
+        elif y == 0 and x > 0:
+            angle = 90
+        elif y == x == 0:
+            angle = 0
         else:
             tangente = x / y
-        current_angle = math.degrees(math.atan(tangente))
-        # print(x, y, round(tangente), current_angle)
-        if x >= 0 >= y:
-            angle = -round(current_angle)
-        if x >= 0 <= y:
-            angle = 180 - round(current_angle)
-        if x <= 0 <= y:
-            angle = 180 - round(current_angle)
-        if x <= 0 >= y:
-            angle = 360 - round(current_angle)
-        # print(angle)
+            current_angle = math.degrees(math.atan(tangente))
+            # print(x, y, round(tangente), current_angle)
+            if x >= 0 >= y:
+                angle = -round(current_angle)
+            if x >= 0 <= y:
+                angle = 180 - round(current_angle)
+            if x <= 0 <= y:
+                angle = 180 - round(current_angle)
+            if x <= 0 >= y:
+                angle = 360 - round(current_angle)
+            # print(angle)
         self.hue = angle / 360 * 255
         if self.hue == 255:
             self.hue = 0
@@ -297,6 +301,8 @@ class colorpickerWheel(QtGui.QWidget):
             angle = 270
         elif y == 0 and x > 0:
             angle = 90
+        elif y == x == 0:
+            angle = 0
         else:
             tangente = x / y
             current_angle = math.degrees(math.atan(tangente))
@@ -362,6 +368,11 @@ class colorpickerWheel(QtGui.QWidget):
             change_in_x = math.sin(angle_in_radians) * radius
         elif y == 0 and x > 0:
             angle = 90
+            angle_in_radians = math.radians(angle)
+            change_in_y = math.cos(angle_in_radians) * radius
+            change_in_x = math.sin(angle_in_radians) * radius
+        elif y == x == 0:
+            angle = 0
             angle_in_radians = math.radians(angle)
             change_in_y = math.cos(angle_in_radians) * radius
             change_in_x = math.sin(angle_in_radians) * radius
@@ -454,10 +465,12 @@ class ColorPicker(QtGui.QWidget):
                                                   centralColorWidget_size=55, centralColorWidget_radius=20,
                                                   centerColorWidget_isCircle=True, sliders=self.sliders)
 
-        self.colorpickerWidget.setFixedSize(self.colorpickerWidget.width, self.colorpickerWidget.height)  # do not forget to set a fixed size same as the size when initialising the class/otherwise set layouts with stretches.
+        self.colorpickerWidget.setFixedSize(self.colorpickerWidget.width,
+                                            self.colorpickerWidget.height)  # do not forget to set a fixed size same as the size when initialising the class/otherwise set layouts with stretches.
 
         self.defaultColors = defaultColors(self.colorpickerWidget)
-        self.defaultColors.setFixedWidth(self.colorpickerWidget.width)  # do not forget to set a fixed size same as the size when initialising the class/otherwise set layouts with stretches.
+        self.defaultColors.setFixedWidth(
+            self.colorpickerWidget.width)  # do not forget to set a fixed size same as the size when initialising the class/otherwise set layouts with stretches.
 
         # ------Layout------
         self.layout = QtGui.QVBoxLayout(self)
@@ -482,7 +495,8 @@ class ColorPicker(QtGui.QWidget):
 def run():
     app = QtGui.QApplication(sys.argv)
     global working_directory
-    working_directory = os.path.dirname(os.path.realpath(__file__)) #directory where files are placed in this case same as the executable directory
+    working_directory = os.path.dirname(
+        os.path.realpath(__file__))  # directory where files are placed in this case same as the executable directory
     Colorpicker = ColorPicker(width=250, startupcolor=[0, 255, 255])  # HSV (0-360, 0-255, 0-255)
     # check the ColorPicker to change more values
 
@@ -490,5 +504,6 @@ def run():
     # print(ColorPicker.hsv_color_array)
 
     sys.exit(app.exec_())
+
 
 run()
