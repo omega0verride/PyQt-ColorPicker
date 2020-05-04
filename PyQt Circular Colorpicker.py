@@ -181,7 +181,8 @@ class colorpickerWheel(QtGui.QWidget):
         self.class_that_called_name = stack[1][0].f_locals["self"].__class__.__name__
         # gets the class from which the colorpicker was called to call the function onCurrentColorChanged
 
-        self.colorPickerHueWheelImage = QtGui.QPixmap(r'%s\colorpicker_wheel.png' % working_directory)
+        self.colorPickerHueWheelImage_File = 'colorpicker_wheel.png'
+        self.colorPickerHueWheelImage = QtGui.QPixmap(os.path.join(working_directory, self.colorPickerHueWheelImage_File))
         self.colorPickerHueWheelImage = self.colorPickerHueWheelImage.scaled(self.width, self.height,
                                                                              QtCore.Qt.KeepAspectRatio,
                                                                              QtCore.Qt.SmoothTransformation)
@@ -449,7 +450,9 @@ class ColorPicker(QtGui.QWidget):
         super(ColorPicker, self).__init__(parent)
         self.width = width
         self.startup_color = startupcolor  # HSV (0-360, 0-255, 0-255)
-        self.setStyleSheet(open(r'%s\colorPickerStylesheet.css' % working_directory).read())
+
+        self.styleSheet_File = 'colorPickerStylesheet.css'
+        self.setStyleSheet(open(os.path.join(working_directory, self.styleSheet_File)).read())
 
         ColorPicker.hsv_color_array = 0
         ColorPicker.rgb_color_array = 0
