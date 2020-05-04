@@ -161,7 +161,7 @@ class colorpicker_sliders(QtGui.QWidget):
 
 class colorpickerWheel(QtGui.QWidget):
     def __init__(self, colorpickerSize, startupcolor, mouseDot_size, mouseDotDistance_changer, centralColorWidget_size,
-                 centralColorWidget_radius, centerColorWidget_isCircle, sliders, parent=None):
+                 centralColorWidget_radius, centerColorWidget_isCircle, change_alpha_channel, sliders, parent=None):
         super(colorpickerWheel, self).__init__(parent)
 
         self.width = colorpickerSize
@@ -173,6 +173,7 @@ class colorpickerWheel(QtGui.QWidget):
         self.centerColorwidth = centralColorWidget_size
         self.centerColorheight = centralColorWidget_size
         self.centerColorWidget_is_Circle = centerColorWidget_isCircle
+        self.change_alpha_channel = change_alpha_channel
 
         self.sliders = sliders
 
@@ -182,7 +183,8 @@ class colorpickerWheel(QtGui.QWidget):
         # gets the class from which the colorpicker was called to call the function onCurrentColorChanged
 
         self.colorPickerHueWheelImage_File = 'colorpicker_wheel.png'
-        self.colorPickerHueWheelImage = QtGui.QPixmap(os.path.join(working_directory, self.colorPickerHueWheelImage_File))
+        self.colorPickerHueWheelImage = QtGui.QPixmap(
+            os.path.join(working_directory, self.colorPickerHueWheelImage_File))
         self.colorPickerHueWheelImage = self.colorPickerHueWheelImage.scaled(self.width, self.height,
                                                                              QtCore.Qt.KeepAspectRatio,
                                                                              QtCore.Qt.SmoothTransformation)
@@ -335,17 +337,29 @@ class colorpickerWheel(QtGui.QWidget):
         self.currentColorChanged()
 
     def change_centerColor(self, color, value):
-        rgba_color = (str(color)).replace(")", ", ") + str(value) + ")"
+        self.value = value
+        if self.change_alpha_channel:
+            rgba_color = (str(color)).replace(")", ", ") + str(self.value) + ")"
+        else:
+            rgba_color = (str(color)).replace(")", ", ") + str(255) + ")"
         self.centerColorWidget.setStyleSheet(
             "QLabel{background-color: rgba%s; border-radius:%s;}" % (rgba_color, str(self.centerColorWidgetRadius)))
 
     def change_centerColorHueValue(self, color, value):
-        rgba_color = (str(color)).replace(")", ", ") + str(value) + ")"
+        self.value = value
+        if self.change_alpha_channel:
+            rgba_color = (str(color)).replace(")", ", ") + str(self.value) + ")"
+        else:
+            rgba_color = (str(color)).replace(")", ", ") + str(255) + ")"
         self.centerColorWidget.setStyleSheet(
             "QLabel{background-color: rgba%s; border-radius:%s;}" % (rgba_color, str(self.centerColorWidgetRadius)))
 
     def change_centerColorHueSaturation(self, color, value):
-        rgba_color = (str(color)).replace(")", ", ") + str(value) + ")"
+        self.value = value
+        if self.change_alpha_channel:
+            rgba_color = (str(color)).replace(")", ", ") + str(self.value) + ")"
+        else:
+            rgba_color = (str(color)).replace(")", ", ") + str(255) + ")"
         self.centerColorWidget.setStyleSheet(
             "QLabel{background-color: rgba%s; border-radius:%s;}" % (rgba_color, str(self.centerColorWidgetRadius)))
 
@@ -457,16 +471,18 @@ class ColorPicker(QtGui.QWidget):
         ColorPicker.hsv_color_array = 0
         ColorPicker.rgb_color_array = 0
         ColorPicker.hsv_color_array_base_360 = 0
+        ColorPicker.hex_color = 0
 
         # self.sliders = colorpicker_sliders(slidersWidgetWidth (recommended same as colorpicker width "self.width"), spaceBetweenColorpickerAndSliders, spaceBetweenSliders)
         self.sliders = colorpicker_sliders(slidersWidgetWidth=self.width, spaceBetweenColorpickerAndSliders=0,
                                            spaceBetweenSliders=0)
 
-        # colorpicker_test_class(int colorpickerSize, startup_color[h(0-360), s(0-255), v(0-255)], int mouseDot_size, int mouseDotDistance_changer, int centralColorWidget_size, int centralColor_radius, bool centerColorWidget_isCircle if True makes the centralcolorWidegt a circle else uses the radius, self.sliders //default do not remove)
+        # colorpickerWheel(int colorpickerSize, startup_color[h(0-360), s(0-255), v(0-255)], int mouseDot_size, int mouseDotDistance_changer, int centralColorWidget_size, int centralColor_radius, bool centerColorWidget_isCircle if True makes the centralcolorWidegt a circle else uses the radius, bool change_alpha_channel if true changes the middle dot alpha channel respectivelly to the calue of brightness slider, self.sliders //default do not remove)
         self.colorpickerWidget = colorpickerWheel(colorpickerSize=self.width, startupcolor=self.startup_color,
                                                   mouseDot_size=30, mouseDotDistance_changer=2,
                                                   centralColorWidget_size=55, centralColorWidget_radius=20,
-                                                  centerColorWidget_isCircle=True, sliders=self.sliders)
+                                                  centerColorWidget_isCircle=True, change_alpha_channel=False,
+                                                  sliders=self.sliders)
 
         self.colorpickerWidget.setFixedSize(self.colorpickerWidget.width,
                                             self.colorpickerWidget.height)  # do not forget to set a fixed size same as the size when initialising the class/otherwise set layouts with stretches.
@@ -494,7 +510,7 @@ class ColorPicker(QtGui.QWidget):
         # print("HSV color", ColorPicker.hsv_color_array)
         # print(ColorPicker.hsv_color_array_360_base)
         # print("RGB color", ColorPicker.rgb_color_array)
-        #print("HEX Color", ColorPicker.hex_color)
+        # print("HEX Color", ColorPicker.hex_color)
 
 
 def run():
