@@ -8,7 +8,7 @@ This is a new design PyQt ColorPicker for python.
 The color circle is actually an image and the hue values are generated from finding the tangent of the distance of the mouse coordinates + center coordinates only within the colorpickerWheel class.
 
 
-Make sure that all the files are  in the same directory with the executable/script or change the "working_sirectory" variable.
+Make sure that all the files are  in the same directory with the executable/script or change the "working_directory" variable.
 
 Call the ColorPicker class like this (change the variables)
 	
