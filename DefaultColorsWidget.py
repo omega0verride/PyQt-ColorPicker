@@ -44,18 +44,18 @@ class DefaultColorsWidget(QWidget):
         ]
 
         # First row buttons
-        for color_name, hex_value, hue, saturation in colors[:6]:
-            self.add_button(self.row0, color_name, hex_value, hue, saturation)
+        for color_name, hex_value, saturation, brightness in colors[:6]:
+            self.add_button(self.row0, color_name, hex_value, saturation, brightness)
 
         # Second row buttons
         self.row1.addSpacing(int(self.buttons_width / 2))  # extra space since this row has 1 less item
-        for color_name, hex_value, hue, saturation in colors[6:]:
-            self.add_button(self.row1, color_name, hex_value, hue, saturation)
+        for color_name, hex_value, saturation, brightness in colors[6:]:
+            self.add_button(self.row1, color_name, hex_value, saturation, brightness)
         self.row1.addSpacing(int(self.buttons_width / 2))  # extra space since this row has 1 less item
 
-    def add_button(self, layout: QHBoxLayout, color_name: str, hex_value: str, saturation: int, value: int):
+    def add_button(self, layout: QHBoxLayout, color_name: str, hex_value: str, saturation: int, brightness: int):
         button = QPushButton()
         button.setToolTip(color_name)
         button.setStyleSheet(f"QPushButton{{background-color: {hex_value};}}")
-        button.clicked.connect(lambda: self.action(hex_value, saturation, value))
+        button.clicked.connect(lambda: self.action(hex_value, saturation, brightness))
         layout.addWidget(button)

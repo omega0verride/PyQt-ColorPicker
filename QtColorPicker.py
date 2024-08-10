@@ -111,7 +111,7 @@ class QtColorPicker(QWidget):
 
         self.hue = None
         self.saturation = None
-        self.value = None
+        self.brightness = None
         self.listener = listener
         self.pointer_distance_correction = pointer_distance_correction
         self.change_central_color_widget_brightness = change_central_color_widget_brightness
@@ -140,37 +140,37 @@ class QtColorPicker(QWidget):
 
         self.set_color(startup_color[0], startup_color[1], startup_color[2])
 
-    def set_color_hex(self, hex_color: str, saturation: int, value: int):
+    def set_color_hex(self, hex_color: str, saturation: int, brightness: int):
         hue = hex_to_hue(hex_color)
-        self.set_color(hue, saturation, value)
+        self.set_color(hue, saturation, brightness)
 
     def set_hue(self, value):
-        self.set_color(hue=value, saturation=self.saturation, value=self.value)
+        self.set_color(hue=value, saturation=self.saturation, brightness=self.brightness)
 
     def set_saturation(self, value):
-        self.set_color(hue=self.hue, saturation=value, value=self.value)
+        self.set_color(hue=self.hue, saturation=value, brightness=self.brightness)
 
     def set_brightness(self, value):
-        self.set_color(hue=self.hue, saturation=self.saturation, value=value)
+        self.set_color(hue=self.hue, saturation=self.saturation, brightness=value)
 
-    def set_color(self, hue: int, saturation: int, value: int):
+    def set_color(self, hue: int, saturation: int, brightness: int):
         if hue == 360:
             hue = 0
         self.hue = hue
-        self.value = value
+        self.brightness = brightness
         self.saturation = saturation
-        self.set_css(hue, saturation, value)
+        self.set_css(hue, saturation, brightness)
         self.colorCircle.set_pointer_position_from_hue(hue)
-        self.sliders.brightnessSlider.setValue(value)
+        self.sliders.brightnessSlider.setValue(brightness)
         self.sliders.saturationSlider.setValue(saturation)
         if self.listener is not None:
-            self.listener(self.hue, self.saturation, self.value)
+            self.listener(self.hue, self.saturation, self.brightness)
 
-    def set_css(self, hue: int, saturation: int, value: int):
+    def set_css(self, hue: int, saturation: int, brightness: int):
         if not self.change_central_color_widget_brightness:
-            value = 255
+            brightness = 255
         self.colorCircle.central_color_widget.setStyleSheet(
-            f"QLabel{{background-color: hsv({hue}, {saturation}, {value}); border-radius:{self.colorCircle.central_color_widget_radius};}}")
+            f"QLabel{{background-color: hsv({hue}, {saturation}, {brightness}); border-radius:{self.colorCircle.central_color_widget_radius};}}")
 
         self.colorCircle.pointer.setStyleSheet(
             f"QLabel{{background-color: hsv({hue}, 255, 255); border-radius:{self.colorCircle.pointer_radius};}}")
@@ -182,7 +182,7 @@ class QtColorPicker(QWidget):
             f"x2:1, y2:0, stop:0 hsv({hue}, 0, 200), stop:1 hsv({hue}, 255, 255));}}")
 
     def get_hsv(self):
-        return [self.hue, self.saturation, self.value]
+        return [self.hue, self.saturation, self.brightness]
 
     def get_hue(self):
         return self.hue
@@ -191,7 +191,7 @@ class QtColorPicker(QWidget):
         return self.saturation
 
     def get_brightness(self):
-        return self.value
+        return self.brightness
 
     def get_rgb(self):
         r, g, b = colorsys.hsv_to_rgb(self.get_hue() / 360.0, self.get_saturation() / 255.0,
