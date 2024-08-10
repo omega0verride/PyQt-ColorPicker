@@ -9,7 +9,7 @@ Make sure that all the files are  in the same directory with the executable/scri
 
 If you change the width, the pointer might be a bit off, this can be fixed by setting ```pointer_distance_correction```.
 
-Simple example that prints the HSL color code:
+Simple example that prints the HSV color code:
 ```python
 import sys
 
@@ -18,7 +18,7 @@ from PyQt6.QtWidgets import QApplication
 from QtColorPicker import QtColorPicker
 
 app = QApplication(sys.argv)
-QtColorPicker(listener=lambda h, s, l: print(f"color: ({h}, {s}, {l})")).show()
+QtColorPicker(listener=lambda h, s, v: print(f"color: ({h}, {s}, {v})")).show()
 sys.exit(app.exec())
 ```
 		
