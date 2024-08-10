@@ -10,7 +10,7 @@ QPushButton#saturation_icon{
   height: 25px;
   width: 25px;
   border-radius: 15px;
-  }
+}
   
 QPushButton#brightness_icon{
   qproperty-icon: url(brightness_icon.png);
@@ -23,11 +23,11 @@ QPushButton#brightness_icon{
   }
 
 QSlider::groove:horizontal {
-
   background: white;
   height: 5px;
   border-radius: 2px;
 }
+
 QSlider::handle:horizontal {
   background: #137df7;
   border: 0px transparent;
@@ -37,6 +37,6 @@ QSlider::handle:horizontal {
   border-radius: 8px;
 }
 
-QLabel#mouseDot{
+QLabel#pointer{
   border: 3px solid #1c3f61;
 }
