@@ -6,6 +6,7 @@ This is an enhanced version of a Color Picker for PyQt6, allowing users to selec
 License
 
 BSD License
+
 Installation
 
     Requirements:
@@ -20,6 +21,7 @@ Installation
         The Color Picker expects all required files to be in the same directory as the pyqtpicker.py script. This includes the stylesheet file colorPickerStylesheet.css.
 
 Usage
+
 Integrating the Color Picker into a Project
 
 Below is a complete example showing how to integrate the Color Picker into your PyQt project. The example includes a button to open the Color Picker and a Take Code button to apply the selected color.
@@ -89,9 +91,10 @@ class ThemeEditor(QMainWindow):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    window = ThemeEditor()
+    window = yourMainapp()
     window.show()
     sys.exit(app.exec())
+    
 -----------------------------------------------------------------------------------------------
 Explanation:
 
