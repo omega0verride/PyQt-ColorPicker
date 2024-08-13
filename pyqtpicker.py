@@ -5,9 +5,6 @@ import colorsys
 import math
 import os
 import sys
-from PyQt6.QtWidgets import QWidget
-
-# working_directory = os.path.dirname(os.path.realpath(__file__))
 
 class defaultColors(QWidget):
     def __init__(self, colorpickerWidget, parent=None):
@@ -20,7 +17,9 @@ class defaultColors(QWidget):
             "Blue": (240, "rgb(0,0,255)"),
             "Yellow": (60, "rgb(255,255,0)"),
             "Aqua": (180, "rgb(0,255,255)"),
-            "Magenta": (300, "rgb(255,0,255)")
+            "Magenta": (300, "rgb(255,0,255)"),
+            "Orange": (30, "rgb(255,165,0)"),
+            "Purple": (270, "rgb(128,0,128)"),
         }
 
         for name, (hue, color) in self.colors.items():
@@ -36,7 +35,6 @@ class colorpicker_sliders(QWidget):
 
         self.width = slidersWidgetWidth
         self.setFixedWidth(self.width)
-
 
         self.spaceBetweenColorpickerAndSliders = spaceBetweenColorpickerAndSliders
         self.spaceBetweenSliders = spaceBetweenSliders
@@ -100,16 +98,18 @@ class colorpickerWheel(QWidget):
         self.change_alpha_channel = change_alpha_channel
 
         self.sliders = sliders
+        script_directory = os.path.dirname(os.path.realpath(__file__))  # <-- Hinzugefügt: Verzeichnis des Skripts
 
         self.colorPickerHueWheelImage_File = 'colorpicker_wheel.png'
         self.colorPickerHueWheelImage = QPixmap(
-            os.path.join(working_directory, self.colorPickerHueWheelImage_File))
+            os.path.join(script_directory, self.colorPickerHueWheelImage_File))  # <-- Geändert: Verzeichnis verwenden
         self.colorPickerHueWheelImage = self.colorPickerHueWheelImage.scaled(self.width, self.height,
                                                                              Qt.AspectRatioMode.KeepAspectRatio,
                                                                              Qt.TransformationMode.SmoothTransformation)
         self.colorPickerHueWheelImageWdiget = QLabel(self)
         self.colorPickerHueWheelImageWdiget.setPixmap(self.colorPickerHueWheelImage)
         self.colorPickerHueWheelImageWdiget.setFixedSize(self.width, self.height)
+
 
         # Create the central color display
         self.centerColorDisplay = QLabel(self.colorPickerHueWheelImageWdiget)
@@ -312,17 +312,9 @@ class ColorPicker(QWidget):
         self.width = width
         self.startup_color = startupcolor  # HSV (0-360, 0-255, 0-255)
 
-        # Korrektes Setzen des working_directory
-        working_directory = os.path.dirname(os.path.realpath(__file__))
-
+        script_directory = os.path.dirname(os.path.realpath(__file__))
         self.styleSheet_File = 'colorPickerStylesheet.css'
-        self.setStyleSheet(open(os.path.join(working_directory, self.styleSheet_File)).read())
-
-        self.colorPickerHueWheelImage_File = 'colorpicker_wheel.png'
-        self.colorPickerHueWheelImage = QPixmap(
-            os.path.join(working_directory, self.colorPickerHueWheelImage_File))
-        # Der restliche Code bleibt unverändert
-
+        self.setStyleSheet(open(os.path.join(script_directory, self.styleSheet_File)).read())
 
         ColorPicker.hsv_color_array = 0
         ColorPicker.rgb_color_array = 0
@@ -339,13 +331,10 @@ class ColorPicker(QWidget):
                                                   sliders=self.sliders)
 
         self.colorpickerWidget.setFixedSize(self.colorpickerWidget.width, self.colorpickerWidget.height)
-
         self.defaultColors = defaultColors(self.colorpickerWidget)
         self.defaultColors.setFixedWidth(self.colorpickerWidget.width)
-
-        # Verschieben des Farbcode-Labels unter die Schieberegler
         self.colorCodeLabel = self.colorpickerWidget.colorCodeLabel
-        # created by ITCRW in 2024 as Fork of a Version of omega0verride in 2020 
+
         # ------Layout------
         self.layout = QVBoxLayout(self)
         self.layout.addWidget(self.colorpickerWidget)
@@ -370,13 +359,9 @@ class ColorPicker(QWidget):
 
 def run():
     app = QApplication(sys.argv)
-    global working_directory
-    working_directory = os.path.dirname(os.path.realpath(__file__))
     Colorpicker = ColorPicker(width=250, startupcolor=[0, 255, 255])  # HSV (0-360, 0-255, 0-255)
-    # check the ColorPicker to change more values
-
     sys.exit(app.exec())
+        #2024 V040 ITCRW 
 
 if __name__ == "__main__":
     run()
-
