@@ -26,6 +26,8 @@ Integrating the Color Picker into a Project
 
 Below is a complete example showing how to integrate the Color Picker into your PyQt project. The example includes a button to open the Color Picker and a Take Code button to apply the selected color.
 Full Example:
+
+```
 ------------------------------------------------------------------------------------------------------
 python
 
@@ -37,7 +39,7 @@ class ThemeEditor(QMainWindow):
     def __init__(self):
         super().__init__()
 
-        # Setup main window
+	# Setup main window
         self.setWindowTitle("Theme Editor")
         self.setGeometry(100, 100, 400, 200)
 
@@ -91,11 +93,13 @@ class ThemeEditor(QMainWindow):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    window = yourMainapp()
+    window = ThemeEditor()
     window.show()
     sys.exit(app.exec())
+
     
------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------  
+```
 Explanation:
 
     Button to Open the Color Picker:
